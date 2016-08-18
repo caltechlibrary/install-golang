@@ -1,9 +1,10 @@
 #!/bin/bash
 
 BOOTSTRAP=go1.4.3
-TARGET=go1.6.3
+TARGET=go1.7
 
 function setupGolang {
+    export CGO_ENABLED=0
     cd
     mkdir -p bin
     ORIGINAL_PATH="$PATH"
