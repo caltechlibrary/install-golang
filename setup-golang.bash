@@ -8,6 +8,7 @@ fi
 sudo apt update
 sudo apt upgrade
 sudo apt install build-essential clang git-core zip unzip
+# on windows add: export CGO_ENABLED=0
 cd
 git clone https://github.com/golang/go go1.4
 cd go1.4/src
