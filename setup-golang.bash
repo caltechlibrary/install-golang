@@ -21,7 +21,11 @@ git checkout go1.7
 ./all.bash
 cd
 echo "Checking if go is in the path"
+echo 'export GOPATH=$HOME' >> .bashrc
+echo 'export PATH=$HOME/bin:$HOME/go/bin:$PATH' >> .bashrc
+export PATH=$HOME/bin:$HOME/go/bin:$PATH
 go version
-if [ @$ != 0 ]; then
-    export PATH=$HOME/bin:$HOME/go/bin:$PATH
+if [ "$?" != "0" ]; then
+  echo "Had problem finding go"
+  exit 1
 fi
