@@ -16,7 +16,7 @@ You need to have your C tool chain setup and installed already.
 On a Mac you need [Mac Ports](https://www.macports.org/) and Apples' Mac Developer Tools (XCode for command line) installed.
 
 ```
-    ./setup-golang.bash
+    ./install-golang.bash
 ```
 
 
