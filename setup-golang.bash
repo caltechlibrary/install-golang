@@ -33,3 +33,4 @@ fi
 echo "Install GopherJS 1.7-x"
 export CGO_ENABLE=0
 go get -u github.com/gopherjs/gopherjs
+gopherjs version
