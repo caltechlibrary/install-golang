@@ -34,6 +34,11 @@ function setupGolang {
     echo
 }
 
+function setupGoTools {
+    echo "Installing gopherjs"
+    go get -u github.com/gopherjs/gopherjs/...
+}
+
 cat <<EOF
 
     This script will check to see if go is installed. If go is missing
@@ -50,6 +55,7 @@ EOF
 GO_CMD=$(which go)
 if [ "$GO_CMD" = "" ]; then
     setupGolang
+    setupGoTools
 else
     echo "Go installed at $GO_CMD"
     echo "Version is "$(go version)
