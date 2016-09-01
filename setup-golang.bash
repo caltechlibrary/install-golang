@@ -30,3 +30,5 @@ if [ "$?" != "0" ]; then
   echo "Had problem finding go"
   exit 1
 fi
+echo "Install GopherJS 1.7-x"
+go get -u github.com/gopherjs/gopherjs
