@@ -8,17 +8,27 @@ function setupGolang {
     mkdir -p bin
     ORIGINAL_PATH="$PATH"
     mkdir -p src
-    # Build a bootstrap version of Go
-    git clone git@github.com:golang/go.git go1.4
-    cd ${BOOTSTRAP:0:5}
-    export GOBIN=$HOME/${BOOTSTRAP:0:5}/bin
-    git checkout $BOOTSTRAP
-    cd src
-    ./all.bash
+    if [ -f $HOME/go1.4/bin/go ]; then
+        echo "Using existing $HOME/go1.4"
+        export GOROOT_BOOTSTRAP=$HOME/go1.4
+    else
+        # Build a bootstrap version of Go
+	if [ ! -d $HOME/go1.4 ]; then
+            git clone git@github.com:golang/go.git go1.4
+        fi
+        cd ${BOOTSTRAP:0:5}
+        export GOBIN=$HOME/${BOOTSTRAP:0:5}/bin
+        git checkout $BOOTSTRAP
+        cd src
+        ./all.bash
+    fi
     # Now build the current version of Go
     cd
-    git clone git@github.com:golang/go.git go
+    if [ ! -d $HOME/go ]; then
+        git clone git@github.com:golang/go.git go
+    fi
     cd go/src
+    git fetch origin
     git checkout $TARGET
     export GOBIN=$HOME/go/bin
     ./all.bash
@@ -53,11 +63,12 @@ cat <<EOF
 EOF
 
 GO_CMD=$(which go)
-if [ "$GO_CMD" = "" ]; then
+GO_VERSION_CHECK=$(go version | grep -E "$TARGET")
+if [ "$GO_CMD" = "" ] || [ "$GO_VERSION_CHECK" = "" ]; then
     setupGolang
     setupGoTools
 else
     echo "Go installed at $GO_CMD"
     echo "Version is "$(go version)
-    echo "Gospace needs version 1.4.3 or better to compile."
+    echo "Gospace needs version 1.4.3 or better to recompile."
 fi
