@@ -1,5 +1,8 @@
 #!/bin/bash
 #
+BOOTSTRAP=go1.4.3
+TARGET=go1.7.1
+
 APT=(which apt)
 if [ "$APT" = "" ]; then
   echo "This setup assumed you're install Golang from an Ubuntu Bash shell (e.g. Linux or Windows 10)"
@@ -12,13 +15,13 @@ sudo apt install build-essential clang git-core zip unzip
 cd
 git clone https://github.com/golang/go go1.4
 cd go1.4/src
-git checkout go1.4.3
+git checkout $BOOTSTRAP
 ./all.bash
 export GOBIN=$HOME
 cd
 git clone https://github.com/golang/go go
 cd go/src
-git checkout go1.7
+git checkout $TARGET
 ./all.bash
 cd
 echo "Checking if go is in the path"
