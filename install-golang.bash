@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BOOTSTRAP=go1.4.3
-TARGET=go1.7.1
+TARGET=go1.7.3
 
 function setupGolang {
     cd
