@@ -31,7 +31,7 @@ If you want to have the *go install* command work you will need to have *GOBIN* 
     #
     # Typical Golang setup
     #
-    export GOROOT=$HOME
+    export GOPATH=$HOME
     export GOBIN=$HOME/bin
 ```
 

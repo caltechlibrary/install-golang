@@ -40,8 +40,7 @@ function setupGolang {
     echo ''
     echo '# Golang Setup '$(date)
     echo 'export PATH=$PATH:$HOME/bin:$HOME/go/bin'
-    echo 'export GOROOT=$HOME/go'
-    echo 'export GOPATH=$HOME/go/bin'
+    echo 'export GOPATH=$HOME'
     echo
 }
 
