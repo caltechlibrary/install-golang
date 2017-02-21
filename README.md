@@ -18,7 +18,7 @@ This approach works for Debian style Linux hosts as well as with "Bash for Ubunt
 On a Mac you need [Mac Ports](https://www.macports.org/) and Apples' Mac Developer Tools (XCode for command line) installed.
 
 ```
-    ./install-golang.bash
+    ./setup-golang.bash
 ```
 
 
