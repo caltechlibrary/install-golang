@@ -14,7 +14,7 @@ if [ -f $HOME/go/bin/go ] || [ "$GOLOCATION" != "" ]; then
     GO_VERSION=$(go version | grep "$GO_TARGET_VERSION")
 fi
 if [ "$GO_VERSION" = "" ]; then
-    read -p "Clone, compile and (re)install go now? Y/N " INSTALL_GO
+    read -p "Clone, compile and (re)install Go now? Y/N " INSTALL_GO
     if [ "$INSTALL_GO" = "Y" ] || [ "$INSTALL_GO" = "y" ]; then
         # Setup where to find go1.4
         if [ ! -d $HOME/go1.4 ]; then
