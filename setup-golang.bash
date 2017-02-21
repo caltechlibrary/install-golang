@@ -1,39 +1,73 @@
 #!/bin/bash
-#
-BOOTSTRAP=go1.4.3
-TARGET=go1.7.3
+GO_TARGET_VERSION="go1.7.5"
+CC=$(which cc)
+if [ "$CC" = "" ]; then
+    export CGO_ENABLED=0
+else
+    export CGO_ENABLED=1
+fi
 
-APT=(which apt)
-if [ "$APT" = "" ]; then
-  echo "This setup assumed you're install Golang from an Ubuntu Bash shell (e.g. Linux or Windows 10)"
-  exit 1
+GO_VERSION=""
+GOLOCATION=$(which go)
+if [ -f $HOME/go/bin/go ] || [ "$GOLOCATION" != "" ]; then
+    export GOPATH=$HOME
+    GO_VERSION=$(go version | grep "$GO_TARGET_VERSION")
 fi
-sudo apt update
-sudo apt upgrade
-sudo apt install build-essential clang git-core zip unzip
-# on windows add: export CGO_ENABLED=0
-cd
-git clone https://github.com/golang/go go1.4
-cd go1.4/src
-git checkout $BOOTSTRAP
-./all.bash
-export GOBIN=$HOME
-cd
-git clone https://github.com/golang/go go
-cd go/src
-git checkout $TARGET
-./all.bash
-cd
-echo "Checking if go is in the path"
-echo 'export GOPATH=$HOME' >> .bashrc
-echo 'export PATH=$HOME/bin:$HOME/go/bin:$PATH' >> .bashrc
-export PATH=$HOME/bin:$HOME/go/bin:$PATH
-go version
-if [ "$?" != "0" ]; then
-  echo "Had problem finding go"
-  exit 1
+if [ "$GO_VERSION" = "" ]; then
+    read -p "Clone, compile and (re)install go now? Y/N " INSTALL_GO
+    if [ "$INSTALL_GO" = "Y" ] || [ "$INSTALL_GO" = "y" ]; then
+        # Setup where to find go1.4
+        if [ ! -d $HOME/go1.4 ]; then
+            echo "Cloning go v1.4"
+            git clone https://github.com/golang/go go1.4
+        fi
+
+        # Compile go1.4 if necessary
+        if [ ! -f $HOME/go1.4/bin/go ]; then
+            echo "Checking out and compiling go 1.4.3"
+            cd $HOME/go1.4
+            git checkout go1.4.3
+            cd src
+            ./all.bash
+            cd
+        fi
+
+        # Setup where to find $GO_TARGET_VERSION
+        if [ ! -d $HOME/go ]; then
+            echo "Cloning go to $HOME/go"
+            git clone https://github.com/golang/go
+        fi
+
+        cd $HOME/go
+        git fetch origin
+        GO_VERSION=$(git branch | grep "$GO_TARGET_VERSION")
+        if [ "$GO_VERSION" = "" ]; then
+            git checkout $GO_TARGET_VERSION
+        fi
+        if [ -f bin/go ]; then
+            GO_VERSION=$(bin/go version | grep "$GO_TARGET_VERSION")
+        fi
+        # Compile $GO_TARGET_VERSION
+        if [ "$GO_VERSION" = "" ]; then
+        echo "Checking out and compiling $GO_TARGET_VERSION"
+        export CGO_ENABLED=0
+        git checkout $GO_TARGET_VERSION
+        cd src
+        ./all.bash
+        fi
+        cd
+        export GOPATH=$HOME
+    fi
 fi
-echo "Install GopherJS 1.7-x"
-export CGO_ENABLE=0
-go get -u github.com/gopherjs/gopherjs
-gopherjs version
+T=$(go version 2> /dev/null)
+if [ "$T" != "" ]; then
+    echo "$T"
+fi
+
+GOPHERJS=$(which gopherjs)
+if [ "$GOPHERJS" = "" ]; then
+    read -p "Install GopherJS? Y/N " Y_OR_N
+    if [ "$Y_OR_N" = "Y" ] || [ "$Y_OR_N" = "y" ]; then
+        go get -u github.com/gopherjs/gopherjs/...
+    fi
+fi
