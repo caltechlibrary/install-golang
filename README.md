@@ -13,7 +13,14 @@ This approach works for Debian style Linux hosts as well as with "Bash for Ubunt
     ./setup-golang.bash
 ```
 
-## Mac OS X ports
+## Mac OS X ports 
+
+As of Mac OS X Sierra booting strapping Go on a Mac is extremely painful. I recommend downloading
+a pre-compile version of Go 1.7.5 for the Mac and bootstraping from that.  _setup-golang.bash_ will
+accompdate that to some degree.  Likewise Homebrew and Mac Ports both have precompiled versions of
+Go that take the pain out of bootstraping or cross compiling to the Mac OS X target.
+
+Here's what used to work on the OS X versions.
 
 On a Mac you need [Mac Ports](https://www.macports.org/) and Apples' Mac Developer Tools (XCode for command line) installed.
 
