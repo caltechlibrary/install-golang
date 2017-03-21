@@ -3,8 +3,8 @@
 function MacOSX_Ugly_Build_Problem() {
     if [ ! -f /usr/local/go/bin/go ]; then
         echo "If you are running Mac OS X Sierra compiling will be VERY problematic"
-        echo "You need to bootstrap from a compiled Binary release like go1.7.5."
-        echo "See https://golang.org/doc/install?download=go1.7.5.darwin-amd64.pkg"
+        echo "You need to bootstrap from a compiled Binary release like go1.8."
+        echo "See https://golang.org/doc/install?download=go1.8.darwin-amd64.pkg"
         echo ""
         read -p "Do you want to continue? Y/N " Y_OR_N
         if [ "$Y_OR_N" != "Y" ] && [ "$Y_OR_N" != "y" ]; then
