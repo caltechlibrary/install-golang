@@ -16,18 +16,27 @@ This approach works for Debian style Linux hosts as well as with "Bash for Ubunt
 ## Mac OS X ports 
 
 As of Mac OS X Sierra booting strapping Go on a Mac is extremely painful. I recommend downloading
-a pre-compile version of Go 1.7.5 for the Mac and bootstraping from that.  _setup-golang.bash_ will
-accompdate that to some degree.  Likewise Homebrew and Mac Ports both have precompiled versions of
-Go that take the pain out of bootstraping or cross compiling to the Mac OS X target.
+a pre-compile version of Go for the Mac and bootstraping from that (see https://golang.org/dl/). Once installed you can use the GOROOT_BOOTSTRAP environment variable to compile your own version of Go. I don't recommend scripting this process as it is likely to
+remain an issue unless go1.4.3 gets updated to support Sierra (which seems unlikely form the discussion lists)
 
-Here's what used to work on the OS X versions.
-
-On a Mac you need [Mac Ports](https://www.macports.org/) and Apples' Mac Developer Tools (XCode for command line) installed.
+This assumes Apples' Mac Developer Tools (XCode for command line) are installed, the compiled version you've installed is
+the latest and that you want to compile your own go1.8.
 
 ```
-    ./setup-golang.bash
+    export GOROOT_BOOTSTRAP=/usr/local/go
+    cd $HOME
+    git clone https://github.com/golang/go go
+    cd go
+    git checkout go1.8
+    cd src
+    ./all.bash
 ```
 
+This should then compile your personal Go in your home directory and you can remove the ports version.
+
+```
+    sudo /bin.rm -fR /usr/local/go # or if you've used Mac Ports try, sudo port uninstall go@1.8
+```
 
 ## After installation
 
@@ -41,5 +50,3 @@ If you want to have the *go install* command work you will need to have *GOBIN* 
     export GOPATH=$HOME
     export GOBIN=$HOME/bin
 ```
-
-
