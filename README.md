@@ -15,7 +15,7 @@ This approach works for Debian style Linux hosts as well as with "Bash for Ubunt
 
 ## Notes for Mac OS X
 
-As of Mac OS X Sierra booting strapping Go on a Mac is extremely painful. I recommend downloading
+As of Mac OS X Sierra bootstrapping Go on a Mac is extremely painful. I recommend downloading
 a pre-compile version of Go for the Mac and bootstraping from that (see https://golang.org/dl/). Once installed you can use the GOROOT_BOOTSTRAP environment variable to compile your own version of Go. I don't recommend scripting this process as it is likely to
 remain an issue unless go1.4.3 gets updated to support Sierra (which seems unlikely form the discussion lists)
 
