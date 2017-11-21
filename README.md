@@ -9,7 +9,7 @@ You need to have your C tool chain setup and installed already.
 This approach works for Debian style Linux hosts as well as with "Bash for Ubuntu for Windows 10".
 
 ```
-    sudo apt-get install build-essentials clang zip unzip
+    sudo apt-get install build-essential clang zip unzip
     ./setup-golang.bash
 ```
 
