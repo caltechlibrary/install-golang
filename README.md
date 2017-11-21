@@ -27,7 +27,7 @@ the latest and that you want to compile your own go1.8.
     cd $HOME
     git clone https://github.com/golang/go go
     cd go
-    git checkout go1.8
+    git checkout go1.9.2
     cd src
     ./all.bash
 ```
@@ -35,7 +35,7 @@ the latest and that you want to compile your own go1.8.
 This should then compile your personal Go in your home directory and you can remove the ports version.
 
 ```
-    sudo /bin.rm -fR /usr/local/go # or if you've used Mac Ports try, sudo port uninstall go@1.8
+    sudo /bin.rm -fR /usr/local/go # or if you've used Mac Ports try, sudo port uninstall go@1.9.2
 ```
 
 ## After installation
