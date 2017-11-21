@@ -15,7 +15,7 @@ function MacOSX_Ugly_Build_Problem() {
 }
 
 START=$(pwd)
-GO_TARGET_VERSION="go1.8"
+GO_TARGET_VERSION="go1.9.2"
 CC=$(which cc)
 if [ "$CC" = "" ]; then
     export CGO_ENABLED=0
